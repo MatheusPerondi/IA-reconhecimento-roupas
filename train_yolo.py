@@ -10,6 +10,32 @@ model.train(
     batch=16                         
 )
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # "from ultralytics import YOLO"
 # Essa linha importa a classe YOLO da biblioteca Ultralytics. É ela que permite carregar modelos prontos ou iniciar um treinamento do zero.
 
