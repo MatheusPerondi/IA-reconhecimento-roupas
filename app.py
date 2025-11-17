@@ -3,17 +3,13 @@ import cv2
 import tkinter as tk
 from PIL import Image, ImageTk
 
-# Carregar modelo
 model = YOLO(r"C:\Trbalho rede neural\runs\detect\train11\weights\best.pt")
 
-# Iniciar webcam
 cap = cv2.VideoCapture(0)
 
-# Criar janela Tkinter
 root = tk.Tk()
 root.title("Detecção de Roupas - YOLO")
 
-# Label onde a imagem será exibida
 label_video = tk.Label(root)
 label_video.pack()
 
@@ -22,31 +18,37 @@ def atualizar_frame():
     if not ret:
         return
 
-    # Fazer predição
     results = model(frame)
     annotated_frame = results[0].plot()
 
-    # Converter BGR para RGB
     annotated_frame = cv2.cvtColor(annotated_frame, cv2.COLOR_BGR2RGB)
 
-    # Converter para imagem Tkinter
     img = Image.fromarray(annotated_frame)
     imgtk = ImageTk.PhotoImage(image=img)
 
-    # Atualizar label
     label_video.imgtk = imgtk
     label_video.config(image=imgtk)
 
-    # Atualizar de novo após 10 ms
     label_video.after(10, atualizar_frame)
 
-# Iniciar loop
 atualizar_frame()
 root.mainloop()
 
-# Quando fechar
 cap.release()
 cv2.destroyAllWindows()
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # "from ultralytics import YOLO"
 # Essa linha importa a classe YOLO da biblioteca Ultralytics. É ela que permite carregar o modelo treinado e fazer detecções nos frames da webcam.
